@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('John');
@@ -12,41 +12,75 @@ export default function App() {
     setTemp('');
   }
 
+  const [people, setPeople] = useState([
+    { name: 'shaun', key: '1' },
+    { name: 'yoshi', key: '2' },
+    { name: 'mario', key: '3' },
+    { name: 'luigi', key: '4' },
+    { name: 'peach', key: '5' },
+    { name: 'toad', key: '6' },
+    { name: 'bowser', key: '7' }
+  ])
+
   return (
-    <View style={styles.container}>
-      {/* Using State & Button Part*/}
-      <View style={styles.header}>
-        <Text style={styles.boldText}>Hello, {name}!</Text>
-        <Text style={styles.boldText}>My name is {person.name} & age is {person.age} </Text>
-      </View>
+    <ScrollView>
+        <View style={styles.container}>
+          {/* Using State & Button Part*/}
+          <View style={styles.header}>
+            <Text style={styles.boldText}>Hello, {name}!</Text>
+            <Text style={styles.boldText}>My name is {person.name} & age is {person.age} </Text>
+          </View>
+          
 
-      {/* Using Text inputs part*/}
-      <View style={styles.textContainer}>
-        <Text>Enter name:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='e.g. David Backham'
-          onChangeText={(val) => setName(val)}
-        />
+          {/* Using Text inputs part*/}
+          <View style={styles.textContainer}>
+            <Text>Enter name:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder='e.g. David Backham'
+              onChangeText={(val) => setName(val)}
+            />
 
-        <Text>Enter age:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='e.g. 99'
-          value={temp}
-          onChangeText={(val) => setTemp(val)}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title='update state' onPress={clickHandler} />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+            <Text>Enter age:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder='e.g. 99'
+              value={temp}
+              onChangeText={(val) => setTemp(val)}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button title='update state' onPress={clickHandler} />
+          </View>
+          
+
+          {/* Using Lists & ScrollView */}
+          <View style={styles.listContainer}>
+            {/* version 1 */}
+            {/* { people.map((item) => {
+              return (
+                <View key={item.key}>
+                  <Text style={styles.itemStyle}>{item.name}</Text>
+                </View>
+              )
+            })} */}
+            {/* version 2 */}
+            { people.map((item => (
+                <View key={item.key}>
+                  <Text style={styles.itemStyle}>{item.name}</Text>
+                </View>
+              )
+            ))}
+          </View>
+          <StatusBar style="auto" />
+        </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 50,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
@@ -69,5 +103,19 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200
+  },
+  listContainer: {
+    marginTop: 20,
+    backgroundColor: 'green',
+    PaddingTop: 40,
+    paddingHorizontal: 20
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  itemStyle: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: 'white',
+    fontSize: 24
   }
 });
