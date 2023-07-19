@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('John');
@@ -52,7 +52,7 @@ export default function App() {
           <View style={styles.buttonContainer}>
             <Button title='update state' onPress={clickHandler} />
           </View>
-          
+
 
           {/* Using Lists & ScrollView */}
           <View style={styles.listContainer}>
@@ -72,6 +72,18 @@ export default function App() {
               )
             ))}
           </View>
+
+
+          {/* Using FlatList */}
+          <View style={styles.flatContainer}>
+              <FlatList
+                numColumns={2}
+                data={people}
+                renderItem={({ item }) => (
+                    <Text style={styles.itemStyle}>{item.name}</Text>
+                )}
+              />
+          </View>
           <StatusBar style="auto" />
         </View>
     </ScrollView>
@@ -88,10 +100,10 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: 'skyblue',
-    borderRadius: 50
+    borderRadius: 50,
   },
   buttonContainer: {
-    marginTop: 20
+    marginTop: 20,
   },
   textContainer: {
     marginTop: 20,
@@ -102,13 +114,13 @@ const styles = StyleSheet.create({
     borderColor: '#777',
     padding: 8,
     margin: 10,
-    width: 200
+    width: 200,
   },
   listContainer: {
     marginTop: 20,
     backgroundColor: 'green',
     PaddingTop: 40,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
     // alignItems: 'center',
     // justifyContent: 'center',
   },
@@ -116,6 +128,14 @@ const styles = StyleSheet.create({
     marginTop: 24,
     padding: 30,
     backgroundColor: 'white',
-    fontSize: 24
-  }
+    fontSize: 24,
+    marginHorizontal: 10,   // 이 내용을 추가하면 가로축에 위치한 item 사이의 간격이 10으로 벌어짐
+
+  },
+  flatContainer: {
+    marginTop: 30,
+    backgroundColor: 'skyblue',
+    PaddingTop: 20,
+    paddingHorizontal: 30,
+  },
 });
