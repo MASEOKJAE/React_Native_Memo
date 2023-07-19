@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('John');
@@ -22,6 +22,17 @@ export default function App() {
     { name: 'bowser', key: '7' }
   ])
 
+  const pressHandler = (id) => {
+    alert(id + ' is pressed');
+  }
+
+  // Cliked item is poped away
+  const popItemHandler = (id) => {
+    setPeople((prevPeople) => {
+      return prevPeople.filter(person => person.key != key);
+    });
+  }
+  
   return (
     <ScrollView>
         <View style={styles.container}>
@@ -74,13 +85,16 @@ export default function App() {
           </View>
 
 
-          {/* Using FlatList */}
+          {/* Using FlatList & Touchable Components*/}
           <View style={styles.flatContainer}>
               <FlatList
                 numColumns={2}
+                keyExtractor={(item) => item.key}
                 data={people}
                 renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => pressHandler(item.key)}>
                     <Text style={styles.itemStyle}>{item.name}</Text>
+                    </TouchableOpacity>
                 )}
               />
           </View>
