@@ -19,7 +19,7 @@ export default function AddTodo({ submitHandler }) {
                 style={styles.button}
                 onPress={() => submitHandler(text)} 
             >
-                <Text style={styles.buttonText}>add todo</Text>
+                <Text style={styles.buttonText}>Add Todo</Text>
             </TouchableOpacity>
         </View>
     )
