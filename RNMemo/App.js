@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, Toucha
 import Header from './components/header'; 
 import TodoItem from './components/todoItem'
 import AddTodo from './components/addTodo'
+import Sandbox from './components/sandbox';
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -35,6 +36,7 @@ const submitHandler = (text) => {
 }
 
   return (
+    // <Sandbox />
       <TouchableWithoutFeedback onPress={() => {
         // Using Keyboard dismissing
         Keyboard.dismiss();
@@ -54,7 +56,7 @@ const submitHandler = (text) => {
                     />
                 </View>
             </View>
-          </View>
+           </View>
       </TouchableWithoutFeedback>
   );
 }
@@ -68,9 +70,11 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   content: {
+    flex: 1,
     padding: 40,
   },
   list: {
-      marginTop: 20,
+    flex: 1,
+    marginTop: 20,
   }
 });
