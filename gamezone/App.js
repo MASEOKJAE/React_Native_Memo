@@ -20,6 +20,8 @@ export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
+    // getFonts() 함수가 반환한 프라미스의 결과를 기다렸다가, 
+    // 프라미스가 완료되면 setFontsLoaded(true)를 호출
     getFonts().then(() => setFontsLoaded(true));
   }, []);
 
