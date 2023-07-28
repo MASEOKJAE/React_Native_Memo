@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import Home from './screens/home';
 import * as Font from 'expo-font';
+import Navigator from './routes/homeStack';
 
 const getFonts = () => Font.loadAsync({
   'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
@@ -28,6 +29,6 @@ export default function App() {
   if (!fontsLoaded) {
     return <LoadingScreen />;
   } else {
-    return <Home />;
+    return <Navigator />;
   }
 }
