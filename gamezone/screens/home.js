@@ -1,24 +1,31 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect }  from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { globalStyles } from '../styles/global';
 
 export default function Home({ navigation }) {
-
-    const pressHandler = () => {
-        // navigate와 push는 같은 의미로 사용
-        navigation.navigate('ReviewDetails');
-        // navigation.push('ReviewDetails');
-    }
+    const [reviews, setReviews] = useState([
+        { title: 'Zelda, Breath of Fresh Air', rating: 5, body: 'Iorem ipsum', key: '1' },
+        { title: 'Gotta Cathc Them All (again)', rating: 4, body: 'Iorem ipsum', key: '2' },
+        { title: 'Not so "Final" Fantasy', rating: 3, body: 'Iorem ipsum', key: '3' },
+    ])
 
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.titleText}>Home Screen</Text>
+            {/* <Text style={globalStyles.titleText}>Home Screen</Text>
             <TouchableOpacity
                 style={globalStyles.button}
                 onPress={() => pressHandler()} 
             >
                 <Text style={globalStyles.buttonText}>Review Dets</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <FlatList
+                data={reviews}
+                renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
+                        <Text style={globalStyles.titleText}>{ item.title }</Text>
+                    </TouchableOpacity>
+                )}
+            />
         </View>
     )
 }
